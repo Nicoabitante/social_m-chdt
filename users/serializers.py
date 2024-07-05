@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from posts.serializers import PostSerializers, CommentSerializer
+from posts.serializers import PostSerializer, CommentSerializer
 from users.models import User
 
 
@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     followers = UserSerializer(many=True, read_only=True)
     following = UserSerializer(many=True, read_only=True)
-    posts = PostSerializers(many=True, read_only=True)
+    posts = PostSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:

@@ -9,9 +9,23 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['content']
 
 
-class PostSerializers(serializers.ModelSerializer):
-    comments = CommentSerializer(source='comments', many=True, read_only=True)
+class PostSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ['content', 'created_at', 'comments']
+        fields = ['author', 'content', 'created_at', 'comments']
+
+
+class PostDetailSerializer(serializers.ModelSerializer):
+    comments = serializers.SerializerMethodField()
+    author = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Post
+        fields = ['id', 'author', 'content', 'created_at', 'comments']
+
+    def get_comments(self, obj):
+        comments = obj.comments.all().order_by('-created_at')[:3]
+        return CommentSerializer(comments, many=True).data
