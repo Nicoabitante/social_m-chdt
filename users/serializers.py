@@ -7,10 +7,11 @@ from users.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    id = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['id', 'username', 'email', 'password']
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])

@@ -26,7 +26,8 @@ class UserMatch(APIView):
     def post(self, request, follower_id, user_id):
         follower = generics.get_object_or_404(User, id=follower_id)
         user = generics.get_object_or_404(User, id=user_id)
-
+        if request.user.id != follower_id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
         if user == follower:
             return Response({'error': 'You cannot follow yourself.'}, status=status.HTTP_400_BAD_REQUEST)
 
