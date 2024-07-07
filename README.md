@@ -22,4 +22,4 @@
   http://0.0.0.0:8000/api/swagger/
 
 ### Run tests
-     docker exec -ti social_m_chdt-web-1  poetry run pytest
+     docker exec -ti social_m-chdt-web-1 poetry run pytest
