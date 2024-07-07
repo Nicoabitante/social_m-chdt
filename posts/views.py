@@ -35,7 +35,7 @@ class PostListCreate(generics.ListCreateAPIView):
         serializer.save(author=self.request.user)
 
     def get_queryset(self):
-        queryset = self.queryset.all()
+        queryset = self.queryset.all().order_by('-created_at')
         from_date = self.request.query_params.get('from_date')
         to_date = self.request.query_params.get('to_date')
         author_id = self.request.query_params.get('author_id')
