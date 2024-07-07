@@ -12,9 +12,9 @@
    ```
         cd social_m-chdt
    ```
-  - execute docker compose
-    ```
-    docker compose up
+- execute docker compose
+  ```
+  docker compose up
 
 
 - go to swagger view
