@@ -5,7 +5,6 @@ from posts.models import Post, Comment
 from posts.serializers import PostSerializer, PostDetailSerializer, CommentSerializer
 
 
-# Create your views here.
 class PostListCreate(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
@@ -27,7 +26,7 @@ class CommentsListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         post_id = self.kwargs['pk']
-        return Comment.objects.filter(post_id=post_id).order_by('created_at')
+        return Comment.objects.filter(post_id=post_id)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user, post_id=self.kwargs['pk'])
