@@ -13,9 +13,10 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Post
-        fields = ['author', 'content', 'created_at', 'comments']
+        fields = ['author', 'content', 'created_at']
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
