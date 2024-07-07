@@ -30,4 +30,4 @@ class CommentsListCreateView(generics.ListCreateAPIView):
         return Comment.objects.filter(post_id=post_id).order_by('created_at')
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user, post=self.kwargs['pk'])
+        serializer.save(author=self.request.user, post_id=self.kwargs['pk'])
