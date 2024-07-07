@@ -12,9 +12,14 @@
    ```
         cd social_m-chdt
    ```
-- execute docker compose
-    
-  ``` docker compose up ```
+  - execute docker compose
+    ```
+    docker compose up
+
+
+- go to swagger view
+
+  http://0.0.0.0:8000/api/swagger/
 
 ### Run tests
      docker exec -ti social_m_chdt-web-1  poetry run pytest
