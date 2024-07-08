@@ -78,3 +78,5 @@ def test_comments_list_create_view_post(api_client):
     response = api_client.post(url, data, format='json')
     assert response.status_code == status.HTTP_201_CREATED
     assert Comment.objects.filter(author=user, post=post, content='Test comment content').exists()
+
+# ToDo test pagination, filters
