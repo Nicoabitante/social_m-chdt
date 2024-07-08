@@ -27,7 +27,7 @@ class CustomPagination(PageNumberPagination):
 
 class PostListCreate(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().select_related('author').prefetch_related('comments')
     serializer_class = PostSerializer
     pagination_class = CustomPagination
 
@@ -55,7 +55,7 @@ class PostListCreate(generics.ListCreateAPIView):
 
 
 class PostDetailView(generics.RetrieveAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().select_related('author').prefetch_related('comments')
     serializer_class = PostDetailSerializer
     permission_classes = [IsAuthenticated]
 
@@ -66,7 +66,7 @@ class CommentsListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         post_id = self.kwargs['pk']
-        return Comment.objects.filter(post_id=post_id)
+        return Comment.objects.filter(post_id=post_id).select_related('author')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user, post_id=self.kwargs['pk'])
