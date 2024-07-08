@@ -13,6 +13,7 @@ from posts.serializers import PostSerializer, PostDetailSerializer, CommentSeria
 class CustomPagination(PageNumberPagination):
     page_size = 20
     page_size_query_param = 'page_size'
+    page_query_param = 'page_number'
     max_page_size = 100
 
     def get_paginated_response(self, data):
