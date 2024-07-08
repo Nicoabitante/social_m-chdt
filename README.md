@@ -23,3 +23,6 @@
 
 ### Run tests
      docker exec -ti social_m-chdt-web-1 poetry run pytest
+
+### Populate db
+     docker exec -ti social_m-chdt-web-1  poetry run python manage.py populate_db --users 10 --posts 50 --comments 200
